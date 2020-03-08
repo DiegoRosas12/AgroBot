@@ -8,7 +8,6 @@ const client = new MongoClient(uri, { useNewUrlParser: true });
 
 const app = express()
 
-
 var corsOptions = {
     origin: "http://localhost:8081"
 };  
@@ -26,7 +25,7 @@ app.get('/', function (req, res) {
 
 client.connect(err => {
     const cultivos = client.db("uranai-database").collection("cultivos");
-    const predicciones = client.db("uranai-database").collection("prediccion");
+    const predicciones = client.db("uranai-database").collection("predicciones");
     // perform actions on the collection object
     cultivos ? console.log("Database connected...") : console.log(err)
 
@@ -45,6 +44,37 @@ client.connect(err => {
             if (err) throw err;
             res.send(result)
         })
+    })
+
+    app.get('/consulta', function(req, res){
+        const resultado = 0
+        var d = new Date();
+        var mes = d.getMonth();
+        var anio = d.getFullYear()
+        // cultivo: tipo de cultivo
+        const cultivo = req.body.cultivo ? req.body.cultivo : "no seleccionado"
+        // anios: años de sembrar el mismo cultivo
+        const anios = req.body.anios ? req.body.anios : 0
+        // ubicacion: por default dolores
+        
+        predicciones.findOne({
+            "mes": mes,
+            "anio": anio,
+        }, function(err, result){
+            if (err){
+                console.log("Data not found")
+                throw err;
+            } 
+            // console.log(result.precipitacion)
+            // res.send(result.precipitacion)
+        })
+
+        if (parseInt(anios) > 3){
+
+        }
+        res.send({cultivo, anios, mes, anio})
+
+        
     })
 
     }
