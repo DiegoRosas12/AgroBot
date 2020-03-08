@@ -25,21 +25,27 @@ app.get('/', function (req, res) {
 })
 
 client.connect(err => {
-      const cultivos = client.db("uranai-database").collection("cultivos");
-      const predicciones = client.db("uranai-database").collection("prediccion");
-      // perform actions on the collection object
-      cultivos ? console.log("Database connected...") : console.log(err)
-      
-      app.get('/cultivos', function(req, res){
-          cultivos.find({}).toArray((err, result)=> {
+    const cultivos = client.db("uranai-database").collection("cultivos");
+    const predicciones = client.db("uranai-database").collection("prediccion");
+    // perform actions on the collection object
+    cultivos ? console.log("Database connected...") : console.log(err)
+
+    app.get('/cultivos', function(req, res){
+        cultivos.find({}).toArray((err, result)=> {
             if (err) throw err;  
             res.send(result)
         })
-      })
+    })
 
-      app.get('/predicciones', function(req, res){
-            
-      })
+    app.get('/predicciones/:mes/:anio', function(req, res){
+        predicciones.findOne({
+            "mes": req.params.mes,
+            "anio": req.params.anio,
+        }, function(err, result){
+            if (err) throw err;
+            res.send(result)
+        })
+    })
 
     }
 );

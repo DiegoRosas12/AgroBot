@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./server/server.js"
+    "start": "node ./server/server.js",
+    "heroku-postbuild": "cd app && npm install && npm run build"
   },
   "repository": {
     "type": "git",
