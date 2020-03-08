@@ -12,6 +12,21 @@
     <link rel="stylesheet" href="assets/css/Highlight-Phone.css">
     <link rel="stylesheet" href="assets/css/Navigation-Clean.css">
     <link rel="stylesheet" href="assets/css/styles.css">
+<script>
+    fetch('https://uranai-hackdhi.herokuapp/')
+        .then(response => {
+        return response.json()
+        })
+        .then(data => {
+            // Work with JSON data here
+            console.log(data)
+            const tituloRespuesta = document.getElementById('form-control')
+            tituloRespuesta.innerText = data
+        })
+        .catch(err => {
+            // Do something for an error here
+        })
+</script>
 </head>
 
 <body>
@@ -44,7 +59,7 @@
 				<option value="3">Tres años</option>
 				<option value="4">4 años o más</option>
 			</select> <br>
-            <p class="text-center" style="color: #03AB88;margin-top: 32px;font-size: 24px;">URANAI TE RECOMIENDA</p><input class="form-control" type="text" style="width: 100%;"><img style="margin-left: 800px;margin-top: -500px;" src="assets/img/simbologia.png" width="20%"></form>
+            <p class="text-center" style="color: #03AB88;margin-top: 32px;font-size: 24px;">URANAI TE RECOMIENDA</p><input id="form-control" type="text" style="width: 100%;"><img style="margin-left: 800px;margin-top: -500px;" src="assets/img/simbologia.png" width="20%"></form>
     </div>
     <div class="highlight-clean" style="background-size: 100%;width: 100%;height: 30%;background-color: #242222;"><img src="assets/img/BeeDevs_Logotipo_Isotipo_280319%20(1).png" width="20%" height="150" style="margin-left: 106px;"><img src="assets/img/BeeDevs_Logotipo_Nombre_280319.png" width="60%" style="margin-left: 42px;">
         <div class="container">
